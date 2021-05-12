@@ -40,6 +40,7 @@ const userSchema = mongoose.Schema({
     },
 });
 
+// password 암호화 하기. (회원가입)
 userSchema.pre('save', function (next) {
     var user = this; //스키마를 가르킴
 
@@ -60,6 +61,7 @@ userSchema.pre('save', function (next) {
     }
 });
 
+// 암호화 된 password와 기존 password를 비교. (로그인)
 userSchema.methods.comparePassword = function (plainPassword, cb) {
     var user = this;
     //cb = callback function
@@ -74,6 +76,7 @@ userSchema.methods.comparePassword = function (plainPassword, cb) {
     });
 };
 
+// 로그인 후 토큰 생성. (로그인 유지)
 userSchema.methods.generateToken = function (cb) {
     var user = this;
 
@@ -90,6 +93,7 @@ userSchema.methods.generateToken = function (cb) {
     });
 };
 
+// 로그인 후 생성한 토큰을 삭제. (로그아웃)
 userSchema.statics.findByToken = function (token, cb) {
     var user = this;
 
