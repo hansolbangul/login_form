@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
-const port = 5000;
+const port = 3070;
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { User } = require('./models/User');
+const { auth } = require('./middleware/auth');
 const config = require('./config/key');
 
 //application/x-www-form-urlencoded   body에 url담음
@@ -27,7 +28,7 @@ mongoose
 app.get('/', (req, res) => res.send('안녕하세요~ 다들 새해복 많이 받으세요!!!'));
 
 //회원가입
-app.post('/register', (req, res) => {
+app.post('/api/users/register', (req, res) => {
     //회원가입할때 필요한 정보들을 클라이언트에서 가져오면 그것들을 DB에 넣어줌
     const user = new User(req.body);
 
@@ -40,7 +41,7 @@ app.post('/register', (req, res) => {
 });
 
 //로그인
-app.post('/login', (req, res) => {
+app.post('/api/users/login', (req, res) => {
     //로그인 라우터
     //요청된 이메일을 데이터베이스에서 있는지 찾음
     User.findOne({ email: req.body.email }, (err, user) => {
@@ -68,6 +69,30 @@ app.post('/login', (req, res) => {
                     .status(200)
                     .json({ loginSuccess: true, userId: user._id });
             });
+        });
+    });
+});
+
+app.get('/api/users/auth', auth, (req, res) => {
+    // 여기 까지 미들웨어를 통과해 왔다는 이야기를 authentication 이 true 라는 말.
+
+    res.status(200).json({
+        _id: req.user._id,
+        isAdmin: req.user.role === 0 ? false : true,
+        isAuth: true,
+        email: req.user.email,
+        name: req.user.name,
+        lastname: req.user.lastname,
+        role: req.user.role,
+        image: req.user.image,
+    });
+});
+
+app.get('/api/users/logout', auth, (req, res) => {
+    User.findOneAndUpdate({ _id: req.user._id }, { token: '' }, (err, user) => {
+        if (err) return res.json({ success: false, err });
+        return res.status(200).send({
+            success: true,
         });
     });
 });
