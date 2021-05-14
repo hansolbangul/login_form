@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3070;
+const port = 5000;
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { User } = require('./models/User');
@@ -26,6 +26,10 @@ mongoose
     .catch((err) => console.log(err));
 
 app.get('/', (req, res) => res.send('안녕하세요~ 다들 새해복 많이 받으세요!!!'));
+
+app.get('/api/hello', (req, res) => {
+    res.send('안녕하세요~');
+});
 
 //회원가입
 app.post('/api/users/register', (req, res) => {
