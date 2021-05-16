@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../../_actions/user_action';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 function LoginPage(props) {
     const dispatch = useDispatch();
@@ -54,6 +54,9 @@ function LoginPage(props) {
 
                 <br />
                 <button type="submit">Login</button>
+                <Link style={{ padding: '5px 0px', textAlign: 'end' }} to="/register">
+                    회원가입
+                </Link>
             </form>
         </div>
     );

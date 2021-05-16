@@ -1,0 +1,49 @@
+.Link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Link .Home a {
+    color: black;
+}
+
+.Link .Home .IconHome {
+    margin-left: 8px;
+    height: 20px;
+    width: 20px;
+}
+
+.Link .Log a {
+    color: rgb(70, 70, 70);
+    font-size: 80%;
+    margin-right: 8px;
+}
+
+.Banner {
+    margin: 20px 0px;
+}
+
+.Banner .IconMain {
+    height: 50px;
+    width: 50px;
+    margin-left: 10px;
+}
+
+.Banner a {
+    display: flex;
+}
+
+.Banner h2 {
+    margin-left: 6px;
+    margin-top: 12px;
+}
+
+.Main_bn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #263343;
+    padding: 8px 12px;
+    color: rgb(255, 255, 255);
+}
