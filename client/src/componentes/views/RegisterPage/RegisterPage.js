@@ -4,46 +4,51 @@ import { useDispatch } from 'react-redux';
 import { registerUser } from '../../../_actions/user_action';
 import { withRouter } from 'react-router-dom';
 
-function RegisterPage(props) {
+import { Form, Input, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
+const { Option } = Select;
+
+const formItemLayout = {
+    labelCol: {
+        xs: {
+            span: 24,
+        },
+        sm: {
+            span: 8,
+        },
+    },
+    wrapperCol: {
+        xs: {
+            span: 24,
+        },
+        sm: {
+            span: 16,
+        },
+    },
+};
+const tailFormItemLayout = {
+    wrapperCol: {
+        xs: {
+            span: 24,
+            offset: 0,
+        },
+        sm: {
+            span: 16,
+            offset: 8,
+        },
+    },
+};
+
+const RegisterPage = (props) => {
     const dispatch = useDispatch();
+    const [form] = Form.useForm();
 
-    const [Email, setEmail] = useState('');
-    const [Name, setName] = useState('');
-    const [Password, setPassword] = useState('');
-    const [ConfirmPassword, setConfirmPassword] = useState('');
-
-    const onNameHandler = (event) => {
-        setName(event.currentTarget.value);
-    };
-
-    const onEmailHandler = (event) => {
-        setEmail(event.currentTarget.value);
-    };
-
-    const onPasswordHandler = (event) => {
-        setPassword(event.currentTarget.value);
-    };
-
-    const onConfirmPasswordHandler = (event) => {
-        setConfirmPassword(event.currentTarget.value);
-    };
-
-    const OnsubmitHandler = (event) => {
-        event.preventDefault(); // 이걸 안하면 계속 페이지가 리프레시 된다.
-
-        if (Password !== ConfirmPassword) {
+    const onFinish = (values) => {
+        console.log('Received values of form: ', values);
+        if (values.password !== values.ConfirmPassword) {
             return alert('비밀번호와 비밀번호 확인은 같아야 합니다.');
         }
 
-        let body = {
-            email: Email,
-            password: Password,
-            name: Name,
-        };
-
-        // axios.post('/api/users/register', body)
-
-        dispatch(registerUser(body)).then((response) => {
+        dispatch(registerUser(values)).then((response) => {
             if (response.payload.success) {
                 props.history.push('/login');
             } else {
@@ -51,6 +56,8 @@ function RegisterPage(props) {
             }
         });
     };
+
+    const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
     return (
         <div
@@ -62,25 +69,127 @@ function RegisterPage(props) {
                 height: '100vh',
             }}
         >
-            <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={OnsubmitHandler}>
-                <label>이메일</label>
-                <input type="email" value={Email} onChange={onEmailHandler} />
-                <label>이름</label>
-                <input type="text" value={Name} onChange={onNameHandler} />
-                <label>비밀번호</label>
-                <input type="password" value={Password} onChange={onPasswordHandler} />
-                <label>비밀번호 확인</label>
-                <input
-                    type="password"
-                    value={ConfirmPassword}
-                    onChange={onConfirmPasswordHandler}
-                />
+            <Form
+                {...formItemLayout}
+                form={form}
+                name="register"
+                onFinish={onFinish}
+                scrollToFirstError
+            >
+                <Form.Item
+                    name="email"
+                    label="E-mail"
+                    rules={[
+                        {
+                            type: 'email',
+                            message: 'The input is not valid E-mail!',
+                        },
+                        {
+                            required: true,
+                            message: 'Please input your E-mail!',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
 
-                <br />
-                <button type="submit">회원가입</button>
-            </form>
+                <Form.Item
+                    name="password"
+                    label="Password"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your password!',
+                        },
+                    ]}
+                    hasFeedback
+                >
+                    <Input.Password />
+                </Form.Item>
+
+                <Form.Item
+                    name="ConfirmPassword"
+                    label="Confirm"
+                    dependencies={['password']}
+                    hasFeedback
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please confirm your password!',
+                        },
+                        ({ getFieldValue }) => ({
+                            validator(_, value) {
+                                if (!value || getFieldValue('password') === value) {
+                                    return Promise.resolve();
+                                }
+
+                                return Promise.reject(
+                                    new Error('The two passwords that you entered do not match!')
+                                );
+                            },
+                        }),
+                    ]}
+                >
+                    <Input.Password />
+                </Form.Item>
+
+                <Form.Item
+                    name="name"
+                    label="name"
+                    tooltip="What do you want others to call you?"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your name!',
+                            whitespace: true,
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    name="phonenumber"
+                    label="Phone"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your phone number!',
+                        },
+                    ]}
+                >
+                    <Input
+                        style={{
+                            width: '100%',
+                        }}
+                    />
+                </Form.Item>
+
+                <Form.Item
+                    name="agreement"
+                    valuePropName="checked"
+                    rules={[
+                        {
+                            validator: (_, value) =>
+                                value
+                                    ? Promise.resolve()
+                                    : Promise.reject(new Error('Should accept agreement')),
+                        },
+                    ]}
+                    {...tailFormItemLayout}
+                >
+                    <Checkbox>
+                        I have read the <a href="">agreement</a>
+                    </Checkbox>
+                </Form.Item>
+                <Form.Item {...tailFormItemLayout}>
+                    <Button type="primary" htmlType="submit">
+                        Register
+                    </Button>
+                </Form.Item>
+            </Form>
         </div>
     );
-}
+};
 
 export default withRouter(RegisterPage);

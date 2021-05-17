@@ -5,29 +5,16 @@ import { useDispatch } from 'react-redux';
 import { loginUser } from '../../../_actions/user_action';
 import { Link, withRouter } from 'react-router-dom';
 
-function LoginPage(props) {
+import { Form, Input, Button, Checkbox } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import './LoginPage.css';
+
+const LoginPage = (props) => {
     const dispatch = useDispatch();
 
-    const [Email, setEmail] = useState('');
-    const [Password, setPassword] = useState('');
-
-    const onEmailHandler = (event) => {
-        setEmail(event.currentTarget.value);
-    };
-
-    const onPasswordHandler = (event) => {
-        setPassword(event.currentTarget.value);
-    };
-
-    const OnsubmitHandler = (event) => {
-        event.preventDefault(); // 이걸 안하면 계속 페이지가 리프레시 된다.
-
-        let body = {
-            email: Email,
-            password: Password,
-        };
-
-        dispatch(loginUser(body)).then((response) => {
+    const onFinish = (values) => {
+        console.log('Received values of form: ', values);
+        dispatch(loginUser(values)).then((response) => {
             if (response.payload.loginSuccess) {
                 props.history.push('/');
             } else {
@@ -46,20 +33,61 @@ function LoginPage(props) {
                 height: '100vh',
             }}
         >
-            <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={OnsubmitHandler}>
-                <label>이메일</label>
-                <input type="email" value={Email} onChange={onEmailHandler} />
-                <label>비밀번호</label>
-                <input type="password" value={Password} onChange={onPasswordHandler} />
+            <Form
+                name="normal_login"
+                className="login-form"
+                initialValues={{
+                    remember: true,
+                }}
+                onFinish={onFinish}
+            >
+                <Form.Item
+                    name="email"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your Username!',
+                        },
+                    ]}
+                >
+                    <Input
+                        prefix={<UserOutlined className="site-form-item-icon" />}
+                        placeholder="Username"
+                    />
+                </Form.Item>
+                <Form.Item
+                    name="password"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your Password!',
+                        },
+                    ]}
+                >
+                    <Input
+                        prefix={<LockOutlined className="site-form-item-icon" />}
+                        type="password"
+                        placeholder="Password"
+                    />
+                </Form.Item>
+                <Form.Item>
+                    <Form.Item name="remember" valuePropName="checked" noStyle>
+                        <Checkbox>Remember me</Checkbox>
+                    </Form.Item>
 
-                <br />
-                <button type="submit">Login</button>
-                <Link style={{ padding: '5px 0px', textAlign: 'end' }} to="/register">
-                    회원가입
-                </Link>
-            </form>
+                    <a className="login-form-forgot" href="">
+                        Forgot password
+                    </a>
+                </Form.Item>
+                <Form.Item>
+                    <Button type="primary" htmlType="submit" className="login-form-button">
+                        Log in
+                    </Button>
+                </Form.Item>
+                Or <a href="/register">register now!</a>
+            </Form>
         </div>
     );
-}
+};
 
 export default withRouter(LoginPage);
