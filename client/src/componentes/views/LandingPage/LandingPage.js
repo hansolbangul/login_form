@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import './LandingPage.css';
 import iconMain from '../../../img/다운로드.png';
 import iconHome from '../../../img/home.png';
+import { AliwangwangOutlined, QqOutlined } from '@ant-design/icons';
 
 function LandingPage(props) {
     useEffect(() => {
@@ -29,7 +30,9 @@ function LandingPage(props) {
             <div className="Link">
                 <div className="Home">
                     <Link to="/">
-                        <img className="IconHome" src={iconHome} />
+                        <AliwangwangOutlined
+                            style={{ fontSize: '40px', marginLeft: '14px', color: 'black' }}
+                        />
                     </Link>
                 </div>
                 <div className="Menu">
@@ -39,15 +42,11 @@ function LandingPage(props) {
                     <Link to="/login">로그인</Link>
                     <Link onClick={onClickHandler}>로그아웃</Link>
                 </div>
-                {/* <button onClick={onClickHandler}>로그아웃</button> */}
             </div>
-            <div className="Banner">
-                <a href="https://www.naver.com">
-                    <img className="IconMain" src={iconMain} />
-                    <h2>네이버</h2>
-                </a>
+            <div className="body">
+                <QqOutlined style={{ fontSize: '4rem' }} />
+                <span style={{ fontSize: '2rem' }}>hello hansol homepage default</span>
             </div>
-            <div className="Main_bn">hello</div>
         </div>
     );
 }
