@@ -43,7 +43,6 @@ const RegisterPage = (props) => {
     const [form] = Form.useForm();
 
     const onFinish = (values) => {
-        console.log('Received values of form: ', values);
         if (values.password !== values.ConfirmPassword) {
             return alert('비밀번호와 비밀번호 확인은 같아야 합니다.');
         }

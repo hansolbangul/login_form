@@ -13,7 +13,6 @@ const LoginPage = (props) => {
     const dispatch = useDispatch();
 
     const onFinish = (values) => {
-        console.log('Received values of form: ', values);
         dispatch(loginUser(values)).then((response) => {
             if (response.payload.loginSuccess) {
                 props.history.push('/');
