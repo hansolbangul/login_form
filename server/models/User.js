@@ -17,8 +17,8 @@ const userSchema = mongoose.Schema({
         type: String,
         minlength: 5,
     },
-    lastname: {
-        type: String,
+    phonenumber: {
+        type: Number,
         maxlength: 50,
     },
     role: {
@@ -26,7 +26,7 @@ const userSchema = mongoose.Schema({
         type: Number,
         default: 0,
     },
-    image: {
+    agreement: {
         type: String,
     },
 
