@@ -27,7 +27,7 @@ const userSchema = mongoose.Schema({
         default: 0,
     },
     agreement: {
-        type: String,
+        type: Boolean,
     },
 
     token: {

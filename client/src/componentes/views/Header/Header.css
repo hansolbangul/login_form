@@ -17,8 +17,27 @@
     width: 20px;
 } */
 
+/* .Link .Menu {
+
+} */
+.Link .Home a {
+    display: flex;
+}
+
+.Link .Home a h2 {
+    margin-left: 8px;
+    margin-top: 4px;
+    font-size: 20px;
+}
+
 .Link .Menu a {
     color: rgb(70, 70, 70);
+    margin-left: 12px;
+    font-size: 18px;
+}
+
+.Link .Menu {
+    margin-right: 50px;
 }
 
 .Link .Log a {
