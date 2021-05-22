@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/login_form/static/css/main.2db4b05b.chunk.css",
-    "main.js": "/login_form/static/js/main.b5c4a690.chunk.js",
-    "main.js.map": "/login_form/static/js/main.b5c4a690.chunk.js.map",
-    "runtime-main.js": "/login_form/static/js/runtime-main.160e06e4.js",
-    "runtime-main.js.map": "/login_form/static/js/runtime-main.160e06e4.js.map",
-    "static/css/2.e4d41df7.chunk.css": "/login_form/static/css/2.e4d41df7.chunk.css",
-    "static/js/2.2e499046.chunk.js": "/login_form/static/js/2.2e499046.chunk.js",
-    "static/js/2.2e499046.chunk.js.map": "/login_form/static/js/2.2e499046.chunk.js.map",
-    "static/js/3.977f922a.chunk.js": "/login_form/static/js/3.977f922a.chunk.js",
-    "static/js/3.977f922a.chunk.js.map": "/login_form/static/js/3.977f922a.chunk.js.map",
-    "index.html": "/login_form/index.html",
-    "static/css/2.e4d41df7.chunk.css.map": "/login_form/static/css/2.e4d41df7.chunk.css.map",
-    "static/css/main.2db4b05b.chunk.css.map": "/login_form/static/css/main.2db4b05b.chunk.css.map",
-    "static/js/2.2e499046.chunk.js.LICENSE.txt": "/login_form/static/js/2.2e499046.chunk.js.LICENSE.txt",
-    "static/media/다운로드.d8ee1a27.png": "/login_form/static/media/다운로드.d8ee1a27.png"
+    "main.css": "/login_form/client/static/css/main.2db4b05b.chunk.css",
+    "main.js": "/login_form/client/static/js/main.5ce25dae.chunk.js",
+    "main.js.map": "/login_form/client/static/js/main.5ce25dae.chunk.js.map",
+    "runtime-main.js": "/login_form/client/static/js/runtime-main.be371cc6.js",
+    "runtime-main.js.map": "/login_form/client/static/js/runtime-main.be371cc6.js.map",
+    "static/css/2.e4d41df7.chunk.css": "/login_form/client/static/css/2.e4d41df7.chunk.css",
+    "static/js/2.df36458b.chunk.js": "/login_form/client/static/js/2.df36458b.chunk.js",
+    "static/js/2.df36458b.chunk.js.map": "/login_form/client/static/js/2.df36458b.chunk.js.map",
+    "static/js/3.977f922a.chunk.js": "/login_form/client/static/js/3.977f922a.chunk.js",
+    "static/js/3.977f922a.chunk.js.map": "/login_form/client/static/js/3.977f922a.chunk.js.map",
+    "index.html": "/login_form/client/index.html",
+    "static/css/2.e4d41df7.chunk.css.map": "/login_form/client/static/css/2.e4d41df7.chunk.css.map",
+    "static/css/main.2db4b05b.chunk.css.map": "/login_form/client/static/css/main.2db4b05b.chunk.css.map",
+    "static/js/2.df36458b.chunk.js.LICENSE.txt": "/login_form/client/static/js/2.df36458b.chunk.js.LICENSE.txt",
+    "static/media/다운로드.d8ee1a27.png": "/login_form/client/static/media/다운로드.d8ee1a27.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.160e06e4.js",
+    "static/js/runtime-main.be371cc6.js",
     "static/css/2.e4d41df7.chunk.css",
-    "static/js/2.2e499046.chunk.js",
+    "static/js/2.df36458b.chunk.js",
     "static/css/main.2db4b05b.chunk.css",
-    "static/js/main.b5c4a690.chunk.js"
+    "static/js/main.5ce25dae.chunk.js"
   ]
 }
